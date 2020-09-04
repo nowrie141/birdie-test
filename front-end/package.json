@@ -9,6 +9,7 @@
     "redux-saga": "^1.0.2",
     "styled-components": "^4.2.0"
   },
+  "proxy": "http://localhost:8000",
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
