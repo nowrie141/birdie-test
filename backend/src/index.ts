@@ -15,7 +15,7 @@ var connection = mysql.createPool({
   database: 'birdietest'
 })
 
-const sql = 'SELECT * FROM events'
+const sql = 'SELECT * FROM events LIMIT 10'
 
 app.set('port', port)
 
@@ -29,8 +29,8 @@ app.use(function (_req, res, next) {
 app.get('/data', function (_req: any, res: any, _next: any) {
   connection.query(sql, function (err: any, result: any, _fields: any) {
     if (err) throw err
-    const jsonData = JSON.parse(JSON.stringify(result));
-    console.log("jsonData", jsonData);
+    // const jsonData = JSON.parse(JSON.stringify(result));
+    console.log("Sending data...");
     res.send({ data: result })
   })
 })

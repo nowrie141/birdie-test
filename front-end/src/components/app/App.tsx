@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
+import { ListElement } from '@App/components/ListElement';
 import { RootState } from '@App/store/reducers';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { Observation } from '@App/types/Observations';
+import { Observation } from '@App/types/Observation';
 // import Title from '@App/components/Title';
 // import Logo from '@App/components/Logo';
 // import SubTitle from '@App/components/SubTitle';
@@ -14,7 +15,7 @@ interface AppProps {
 }
 
 interface AppState {
-  observations: Observation[]
+  observations: Observation[];
 }
 
 const GlobalStyle = createGlobalStyle`
@@ -41,12 +42,12 @@ class App extends React.Component<AppProps, AppState> {
     observations: [],
   };
 
-  componentDidMount(){
-    fetch('http://localhost:8000')
-    .then( res => res.json())
-    .then(res => this.setState({
-      observations: res.data
-    }))
+  componentDidMount() {
+    fetch('http://localhost:8000/data')
+      .then(res => res.json())
+      .then(res => this.setState({
+        observations: res.data
+      }));
   }
 
   public constructor(props: AppProps) {
@@ -57,7 +58,22 @@ class App extends React.Component<AppProps, AppState> {
     return (
       <>
         <GlobalStyle />
-    <div className="App-intro">{observations}</div>
+        <div className="App-intro">
+          <ul role="list">
+            {
+              this.state.observations.map(element =>
+                <ListElement
+                  key={element.id}
+                  id={element.id}
+                  event_type={element.event_type}
+                  visit_id={element.visit_id}
+                  timestamp={element.timestamp}
+                  caregiver_id={element.caregiver_id}
+                  care_recipient_id={element.care_recipient_id}
+                />)
+            }
+          </ul>
+        </div>
       </>
     );
   }
