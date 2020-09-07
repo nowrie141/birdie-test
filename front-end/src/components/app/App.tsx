@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { ListElement } from '@App/components/ListElement';
+import { ListElement } from '@App/components/app/ListElement';
 import { RootState } from '@App/store/reducers';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -65,11 +65,7 @@ class App extends React.Component<AppProps, AppState> {
                 <ListElement
                   key={element.id}
                   id={element.id}
-                  event_type={element.event_type}
-                  visit_id={element.visit_id}
-                  timestamp={element.timestamp}
-                  caregiver_id={element.caregiver_id}
-                  care_recipient_id={element.care_recipient_id}
+                  payload={element.payload}
                 />)
             }
           </ul>
